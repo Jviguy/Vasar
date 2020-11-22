@@ -6,7 +6,8 @@ namespace Ghezin\cp\discord;
 
 class Embed{
 
-	protected $data=[];
+    /** @var string[] $data */
+	protected $data = [];
 
 	public function asArray():array{
 		return $this->data;

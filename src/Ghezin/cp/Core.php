@@ -7,7 +7,6 @@ namespace Ghezin\cp;
 use Ghezin\cp\Databases\ClansDatabase;
 use Ghezin\cp\Databases\MainDatabase;
 use Ghezin\cp\Databases\StaffDatabase;
-use JviguyGames\PotsAndPearls\Main;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Player;
 use pocketmine\utils\Config;
@@ -300,6 +299,7 @@ class Core extends PluginBase {
 		self::$staffUtils = new StaffUtils();
 		self::$forms = new Forms();
 	}
+
 	public function setCommands(){
 		$map=$this->getServer()->getCommandMap();
 		$map->register("kickall", new KickAllCommand($this));
@@ -341,6 +341,7 @@ class Core extends PluginBase {
 		$map->register("rank", new RankCommand($this));
 		$map->register("gm", new GamemodeCommand($this));
 	}
+
 	public function setTasks(){
 		$map=$this->getScheduler();
 		$map->scheduleRepeatingTask(new FlagsTask($this), 20 * 10);
@@ -358,6 +359,7 @@ class Core extends PluginBase {
 		$map->scheduleRepeatingTask(new NameTagTask($this), 5);
 		$map->scheduleRepeatingTask(new VanishTask($this), 5);
 	}
+
 	public function setEntities(){
 		Entity::registerEntity(FastPotion::class, true, ["FastPotion"]);
 		Entity::registerEntity(DefaultPotion::class, true, ["DefaultPotion"]);
@@ -371,9 +373,11 @@ class Core extends PluginBase {
 
 		Entity::registerEntity(PotionEntity::class, true);
 	}
+
 	public function setItems(){
 		ItemFactory::registerItem(new Rod(), true);
 	}
+
 	public function disableCommands(){
 		$map=$this->getServer()->getCommandMap();
 		$map->unregister($map->getCommand("kill"));
@@ -393,16 +397,19 @@ class Core extends PluginBase {
 		$map->unregister($map->getCommand("tell"));
 		$map->unregister($map->getCommand("say"));
 	}
+
 	public function loadUpdatingFloatingTexts(){
 		foreach($this->getUpdatingFloatingTexts()->getAll() as $id => $array){
 			$this->updatingFloatingTexts[$id]=new FloatingTextParticle(new Vector3($array["x"], $array["y"], $array["z"]), $array["text"], $array["title"]);
 		}
 	}
+
 	public function loadStaticFloatingTexts(){
 		foreach($this->getStaticFloatingTexts()->getAll() as $id => $array){
 			$this->staticFloatingTexts[$id]=new FloatingTextParticle(new Vector3($array["x"], $array["y"], $array["z"]), $array["text"], $array["title"]);
 		}
 	}
+
 	public function getUpdatingFloatingTexts():Config{
 		return $this->updatingFloatingText;
 	}

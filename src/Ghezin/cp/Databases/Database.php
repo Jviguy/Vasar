@@ -13,6 +13,8 @@ declare(strict_types=1);
 namespace Ghezin\cp\Databases;
 
 use SQLite3;
+use SQLite3Result;
+use SQLite3Stmt;
 
 /**
  * @author Jviguy
@@ -60,6 +62,38 @@ abstract class Database
      */
     public function ExecuteQuery(string $query): bool {
         return $this->internaldb->exec($query);
+    }
+
+    /**
+     * @author Jviguy
+     *
+     * @param string $query the SQLite3 query to be executed
+     * @phpstan-var string $query the SQLite3 query to be executed
+     *
+     * @api
+     *
+     * @see SQLite3::prepare()
+     *
+     * @return SQLite3Stmt a query to be binded / executed
+     * @phpstan-return Sqlite3Stmt a query to be binded / executed
+     */
+    public function prepareQuery(string $query): SQLite3Stmt {
+        return $this->internaldb->prepare($query);
+    }
+
+    /**
+     * @author Jviguy
+     *
+     * @param string $query the query to be ran through the database
+     *
+     * @api
+     *
+     * @see SQLite3::query()
+     *
+     * @return SQLite3Result the result of the query
+     */
+    public function query(string $query): SQLite3Result {
+        return $this->query($query);
     }
 
     /**

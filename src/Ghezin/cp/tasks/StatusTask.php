@@ -26,6 +26,6 @@ class StatusTask extends Task{
 		//$embed->setDescription($damager->getName());
 		$embed->setFooter("Query Time: ".Utils::getTimeExact(), null);
 		$emessage->addEmbed($embed);
-		$webHook->send($emessage);
+		$webHook->sendAsync($emessage);
 	}
 }
