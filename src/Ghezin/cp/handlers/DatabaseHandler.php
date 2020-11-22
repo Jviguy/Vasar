@@ -14,10 +14,19 @@ class DatabaseHandler{
 	private $plugin;
 
 	public function __construct(){
-		$this->plugin=Core::getInstance();
+		$this->plugin = Core::getInstance();
 	}
+
+    /**
+     * @param $player
+     * @param $reason
+     * @param $duration
+     * @param $staff
+     *
+     * @noinspection SqlDialectInspection, SqlNoDataSourceInspection
+     */
 	public function mutePlayer($player, $reason, $duration, $staff){
-		$query=$this->plugin->staff->prepare("INSERT OR REPLACE INTO mutes (player, reason, duration, staff, date) VALUES (:player, :reason, :duration, :staff, :date);");
+		$query = $this->plugin->staffdb->prepare("INSERT OR REPLACE INTO mutes (player, reason, duration, staff, date) VALUES (:player, :reason, :duration, :staff, :date);");
 		$query->bindValue(":player", Utils::getPlayerName($player));
 		$query->bindValue(":reason", $reason);
 		$query->bindValue(":duration", $duration);
