@@ -1,0 +1,9 @@
+name: Vasar
+#pmmp requires semantic versioning SEE https://semver.org/
+version: 0.0.1
+#qualify all apis under 3.0.0
+api: [3.0.0]
+authors:
+  - Ghezin (Warro)
+  - Jviguy
+main: src\Ghezin\cp\Core
