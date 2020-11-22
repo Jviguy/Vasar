@@ -6,4 +6,4 @@ api: [3.0.0]
 authors:
   - Ghezin (Warro)
   - Jviguy
-main: src\Ghezin\cp\Core
+main: Ghezin\cp\Core

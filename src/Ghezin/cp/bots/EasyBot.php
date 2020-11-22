@@ -22,41 +22,38 @@ use pocketmine\level\Level;
 use pocketmine\math\Vector3;
 use pocketmine\block\Liquid;
 use pocketmine\nbt\tag\CompoundTag;
-use pocketmine\utils\TextFormat as C;
 use pocketmine\item\Item;
-use pocketmine\event\server\DataPacketReceiveEvent;
-use pocketmine\network\mcpe\protocol\InventoryTransactionPacket;
 use pocketmine\network\mcpe\protocol\LevelSoundEventPacket;
 use Ghezin\cp\Utils;
 use Ghezin\cp\duels\groups\BotDuelGroup;
 
-class EasyBot extends Human{
+class EasyBot extends Human {
 	
-	const ATTACK_COOLDOWN=8;
-	const REACH_DISTANCE=3;
-	const LOW_REACH_DISTANCE=0.5;
-	const ACCURACY=40;
-	const POT_CHANCE=990;//995
-	const POT_WAIT=20 * 6;//6 seconds
-	
-	public $name="Easy Bot";
-	public $target=null;
-	public $duel=null;
-	public $deactivated=false;
-	public $refilling=false;
-	public $potsUsed=0;
-	public $refillTicks=0;
-	public $randomPosition=null;
-	public $newLocTicks=60;
-	public $gravity=0.0072;
-	public $potTicks=self::POT_WAIT;
-	public $jumpTicks=10;
-	public $attackcooldown=self::ATTACK_COOLDOWN;
-	public $reachDistance=self::REACH_DISTANCE;
-	public $safeDistance=2;
-	public $attackDamage=8;
-	public $speed=0.55;
-	public $startingHealth=20;
+	const ATTACK_COOLDOWN = 8;
+	const REACH_DISTANCE = 3;
+	const LOW_REACH_DISTANCE = 0.5;
+	const ACCURACY = 40;
+	const POT_CHANCE = 990;//995
+	const POT_WAIT = 20 * 6;//6 seconds
+
+	public $name = "Easy Bot";
+	public $target = null;
+	public $duel = null;
+	public $deactivated = false;
+	public $refilling = false;
+	public $potsUsed = 0;
+	public $refillTicks = 0;
+	public $randomPosition = null;
+	public $newLocTicks = 60;
+	public $gravity = 0.0072;
+	public $potTicks = self::POT_WAIT;
+	public $jumpTicks = 10;
+	public $attackcooldown = self::ATTACK_COOLDOWN;
+	public $reachDistance = self::REACH_DISTANCE;
+	public $safeDistance = 2;
+	public $attackDamage = 8;
+	public $speed = 0.55;
+	public $startingHealth = 20;
 
 	public function __construct(Level $level, CompoundTag $nbt){
 		parent::__construct($level, $nbt);
@@ -65,13 +62,16 @@ class EasyBot extends Human{
 		$this->setNametag($this->name);
 		$this->generateRandomPosition();
 	}
+
 	public function getType(){
 		return "EasyBot";
 	}
+
 	public function setTarget($player){
 		$target=$player;
 		$this->target=($target!=null ? $target->getName():"");
 	}
+
 	public function hasTarget():bool{
 		if($this->target===null) return false;
 		$target=$this->getTarget();
@@ -79,29 +79,32 @@ class EasyBot extends Human{
 		$player=$this->getTarget();
 		return !$player->isSpectator();
 	}
+
 	public function getTarget(){
 		return Server::getInstance()->getPlayerExact($this->target);
 	}
+
 	public function setDuel(BotDuelGroup $duel){
 		$this->duel=$duel;
 	}
+
 	public function hasDuel():bool{
 		return $this->duel!==null;
 	}
 	public function getDuel(){
 		return $this->duel;
 	}
-	private function isDeactivated():bool{
-		return $this->deactivated===true;
+	private function isDeactivated(): bool{
+		return $this->deactivated;
 	}
-	public function setDeactivated(bool $result=true){
+	public function setDeactivated(bool $result = true){
 		$this->deactivated=$result;
 	}
-	private function isRefilling():bool{
-		return $this->refilling===true;
+	private function isRefilling(): bool{
+		return $this->refilling;
 	}
-	public function setRefilling(bool $result=true){
-		$this->refilling=$result;
+	public function setRefilling(bool $result = true){
+		$this->refilling = $result;
 	}
 	public function getName():string{
 		return $this->name;

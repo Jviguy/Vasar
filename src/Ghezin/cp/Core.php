@@ -169,7 +169,6 @@ class Core extends PluginBase {
 		$this->setTasks();
 		$this->setEntities();
 		$this->setItems();
-		$this->setFloaters();
 		$this->loadUpdatingFloatingTexts();
 		$this->loadStaticFloatingTexts();
 		

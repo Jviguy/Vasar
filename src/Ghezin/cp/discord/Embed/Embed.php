@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghezin\cp\discord\Embed;
 
 use ArrayAccess;
+use pocketmine\utils\Color;
 
 class Embed implements ArrayAccess
 {
@@ -41,5 +42,17 @@ class Embed implements ArrayAccess
         foreach ($this->json as $member) {
             $member->UnMarshal();
         }
+    }
+
+    public function SetColor(Color $color) {
+        $this["color"] = $color->toRGBA();
+    }
+
+    public function SetTimestamp(string $stamp) {
+        $this["timestamp"] = $stamp;
+    }
+
+    public function Add(EmbedMember $member) {
+        $this[$member->GetMemberName()] = $member;
     }
 }

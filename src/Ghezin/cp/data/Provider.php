@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ghezin\cp\data;
 
+use mysqli;
 use pocketmine\Player;
 use Ghezin\cp\Core;
 use Ghezin\cp\CPlayer;
@@ -18,7 +19,7 @@ class Provider{
 		$this->plugin=$plugin;
 	}
 	public function open(){
-		$this->mysql=new \mysqli(Core::HOST, Core::USER, Core::PASS, Core::DATABASE, 3306);
+		$this->mysql = new mysqli(Core::HOST, Core::USER, Core::PASS, Core::DATABASE, 3306);
 		if($this->mysql->connect_error){
 			Core::getInstance()->getLogger()->critical("Could not connect to MySQL server: " . $this->msql->connect_error);
 			return;
@@ -26,7 +27,7 @@ class Provider{
 		Core::getInstance()->getLogger()->notice("Database connection successful.");
 	}
 	public function close(){
-		if($this->mysql instanceof \mysqli){
+		if($this->mysql instanceof mysqli){
 			$this->mysql->close();
 		}
 	}
